@@ -3,9 +3,51 @@ Delivering small (~µL) calibrated volumes of liquid is important in multiple fi
 
 
 # Getting started
-## Dependencies
-**To do**  
-*Likely install conda, install dependencies*
+
+## Installing the dependencies
+To install Python and the required dependencies we strongly recommend to use
+[conda], [mamba] or [pipenv].
+
+## Installing conda
+
+Conda can be installed multiple ways. There is no recommendations about how to
+but one can read [there](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+for a likely exhaustive list on ways to install conda.
+
+Note that Anaconda is not necessarily recommended, [miniconda] might be a better
+alternative.
+
+Moreover, it is advised to start jupyter notebooks from a shell/terminal/prompt
+to be able to better see the error messages.
+
+## Installing the dependencies
+
+Once conda is installed (or your favorite environment manager), you can create
+and activate your environment:
+```shell
+conda create -n syringedriver
+conda activate syringedriver
+```
+
+Then, there is a `setup.py` file with the basic dependencies present within this
+repository. It means that you can easily install all the likely necessary
+dependencies using [pip]. It might be necessary to install it first:
+```shell
+conda install pip
+```
+
+Then, it is possible to install the dependencies, from the placozoa-tracking
+folder the following way:
+```shell
+pip install .
+```
+
+### List of dependencies:
+Here is the list of dependencies that will be installed:
+- [ipython] : interactive python terminal
+- [jupyter] : python notebook
+- ???
+
 
 # **Road Map**
 
@@ -35,21 +77,32 @@ We do not expect that all the objectives are completed (yes we do).
     - 7.3 OpenLabFrame: :tropical_drink:
     - ...
 
+You can find the roadmap for the project as an issue [there](https://github.com/CENTURI-Hackathon-2022/syringe-driver/issues/1).
+
 # Objective dependencies
 
-→ 0 → 1  
-→ 0 → 2  
-1 & 2 → 3 → 4  
-4 → 5 & 6  
+&rarr; 0 &rarr; 1  
+&rarr; 0 &rarr; 2  
+1 & 2 &rarr; 3 &rarr; 4  
+4 &rarr; 5 & 6  
 
 ### Legend:
 
     #x → #y: #x needs to be completed before #y can be started
-    #x | #y: #x or #y needs to be completed
-    #x & #y: #x and #y needs to be completed
+    #x | #y: #x **or** #y needs to be completed
+    #x & #y: #x **and** #y needs to be completed
+    
+    
+[conda]: https://docs.conda.io/en/latest/
+[mamba]: https://mamba.readthedocs.io/en/latest/
+[pipenv]: https://pipenv.pypa.io/en/latest/
+[miniconda]: https://docs.conda.io/en/latest/miniconda.html
+[pip]: https://pypi.org/project/pip
+[ipython]: https://ipython.org
+[jupyter]: https://jupyter.org
+
 
 <br/><br/>  
-*Setup*  
-*Example code*  
+
 *Arduino vs. Raspberry-pi*  
 *Open each step as an Issue*  
