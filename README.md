@@ -60,17 +60,21 @@ We do not expect that all the objectives are completed (yes we do).
 
 - **0** :wrench: Setup
 - **1** :scream_cat: Learn how to tame the stepper motor (without syringe)
+    - 1.1 CNC shield and Arduino Uno board
+    - 1.2 grbl firmware
+    - 1.3 Gcode (Arduino IDE, UGS)
 - **2** :ear: Learn how to listen to the captors (without motor)
-    - 2.1 limit switches
-    - 2.2 event captors (lick sensor (optic//capacitive), etc.)
+    - 2.1 Python on the RPi 
+    - 2.2 Read sensors (lick sensor, limit switch)
 - **3** :couple_with_heart: Connect them, verify if the two of them can work together.
+    - 3.1 Stream gcode with Python
+    - 3.2 Couple gcode streaming and sensor reading
 - **4** :wedding: ASSEMBLE!
     - 4.1 :tada:
-<br/><br/>
 - **5** :left_right_arrow: Fill/Empty the syringe
 - **6** :droplet: Deliver a calibrated drop when an event occurs
     - 6.1 Compute number of steps needed to have the volume we want
-<br/><br/>
+    - 6.2 Check the water flow with the fluigent device
 - **7** Bonus Goals
     - 7.1 Image analysis: use a webcam to estimate the size of the drop 
     - 7.2 Recapture: Use a second syringe driver to recapture the drop
