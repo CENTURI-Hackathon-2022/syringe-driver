@@ -38,6 +38,11 @@ def move_z(ser, val):
     ser.write(f"g0x{val}\n".encode('utf-8'))
     time.sleep(def_wait_time)
     
+def print_answer(ser):
+    while ser.in_waiting > 0:
+        line = ser.readline().decode('utf-8').rstrip()
+        print(line)
+    return 0
 
 if __name__ == '__main__':
     # Raspberry pi Setup
@@ -50,11 +55,14 @@ if __name__ == '__main__':
     # Unlock
     ser.write(b"$H\n")
     time.sleep(def_wait_time)
+    print_answer(ser)
     # Set absolute position mode
     ser.write(b"g91\n")
     time.sleep(def_wait_time)
+    print_answer(ser)
     # Set soft limit
     set_soft_limit_mm(ser, limit_len_mm)
+    print_answer(ser)
     # Move on a range
     fill()
     # move_range(ser, 50, 10)
