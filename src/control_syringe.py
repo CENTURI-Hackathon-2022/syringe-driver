@@ -1,4 +1,6 @@
+from cgitb import reset
 import time
+from tracemalloc import reset_peak
 import serial
 from gpiozero import LightSensor, LED, Button
 
@@ -39,38 +41,58 @@ def move_z(ser, val):
     time.sleep(def_wait_time)
     
 def print_answer(ser):
-    while ser.in_waiting > 0:
-        line = ser.readline().decode('utf-8').rstrip()
-        print(line)
-    return 0
+    ans = b''
+    while ans == b'':
+        ans = ser.readline()
+    line = ans.decode('utf-8').rstrip()
+    print(line)
+    if line[:5] == 'error' or line[:5]=='ALARM':
+        print('Error, stopping program.')
+        exit
+
 
 if __name__ == '__main__':
     # Raspberry pi Setup
     bottom_limit_switch = Button(3)
     bottom_limit_switch.when_pressed = stop_movement
+
     # Arduino Setup
     ser = serial.Serial('/dev/ttyACM0', 115200)
     time.sleep(2)
     ser.reset_input_buffer()
+
     # Unlock
     ser.write(b"$H\n")
     time.sleep(def_wait_time)
     print_answer(ser)
+
     # Set absolute position mode
     ser.write(b"g91\n")
     time.sleep(def_wait_time)
     print_answer(ser)
+    
     # Set soft limit
     set_soft_limit_mm(ser, limit_len_mm)
     print_answer(ser)
+ 
     # Move on a range
-    fill()
-    # move_range(ser, 50, 10)
-    # Move
-    # move_z(ser, 3)
+    # # fill()
+    move_range(ser, 10, 100)
+    print_answer(ser)
+
+    # stop_movement()
+    # # Move
+    # # move_z(ser, 3)
+
+    print('DONE')
     while True:
         if ser.in_waiting > 0:
             line = ser.readline().decode('utf-8').rstrip()
             print(line)
+            if line[:5] == 'error' or line[:5]=='ALARM':
+                print('Error, stopping program.')
+                exit
+             
+
     
         
