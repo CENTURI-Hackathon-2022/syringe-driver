@@ -20,13 +20,19 @@ from gpiozero import Button
 class SyringeDriver:
     def __init__(self):
         self.arduino = None
-        self.cal_factor = 6.7
         self.default_wait_time = 1 # seconds
+        self.limit_len_mm = 200
+        self.home_coordinate = -199
+        # Params for 10 mL syringe
+        # self.cal_factor = 6.7
+        # self.syringe_len_mm = 100
+        # self.fill_speed = 100
+        # self.volume_deliver_speed = 10
+        # Params for 1 mL syringe
+        self.cal_factor = 60
         self.syringe_len_mm = 100
         self.fill_speed = 100
-        self.limit_len_mm = 200
         self.volume_deliver_speed = 10
-        self.home_coordinate = -199
         self.setup()
     
     def setup(self):
@@ -160,9 +166,14 @@ class SyringeDriver:
 
 if __name__ == '__main__':
     sd = SyringeDriver()
-    sd.fill_syringe(2)
+    # Test for 10 mL syringe
+    # sd.fill_syringe(2)
+    # time.sleep(20)
+    # sd.deliver_volume(1)
+    # Test for 1 mL syringe
+    sd.fill_syringe(0.1)
     time.sleep(20)
-    sd.deliver_volume(1)
+    sd.deliver_volume(0.1)
     while True:
         if sd.arduino.in_waiting > 0:
             line = sd.arduino.readline().decode('utf-8').rstrip()
